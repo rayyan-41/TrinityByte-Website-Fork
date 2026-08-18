@@ -1,0 +1,294 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TRINITYBYTE DESIGN TOKENS
+   Near-black canvas · warm ivory panels · champagne-gold accent
+   ============================================================ */
+:root {
+  /* color */
+  --bg: #050505;
+  --bg-elev: #0b0b0c;
+  --ink: #070707;
+  --ivory: #f2efe9;
+  --ivory-soft: #eae6dd;
+  --white: #ffffff;
+  --gold: #c8ab72;
+  --gold-soft: #d9c496;
+  --gold-deep: #9d8354;
+  --line-dark: rgba(255, 255, 255, 0.12);
+  --line-light: rgba(7, 7, 7, 0.12);
+  --muted-on-dark: rgba(242, 239, 233, 0.6);
+  --muted-on-light: rgba(7, 7, 7, 0.55);
+
+  /* layout */
+  --container-pad: clamp(20px, 5vw, 72px);
+  --frame-pad: clamp(10px, 2.4vw, 34px);
+  --card-radius: clamp(16px, 2.2vw, 32px);
+  --section-gap: clamp(96px, 12vw, 180px);
+
+  /* type */
+  --font-display: var(--font-inter-display), "Inter", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+  --font-mono: var(--font-intel-mono), "SFMono-Regular", monospace;
+
+  /* fluid steps */
+  --text-hero: clamp(44px, 6.7vw, 96px);
+  --text-display: clamp(48px, 8.35vw, 120px);
+  --text-title: clamp(28px, 2.8vw, 40px);
+  --text-card-title: clamp(24px, 2.5vw, 36px);
+  --text-lead: clamp(17px, 1.4vw, 20px);
+  --text-body: clamp(15px, 1.15vw, 16.5px);
+  --text-label: clamp(11px, 0.85vw, 12.5px);
+
+  /* motion */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.76, 0, 0.24, 1);
+  --dur-fast: 0.45s;
+  --dur-base: 0.8s;
+  --dur-slow: 1.2s;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-ink: var(--ink);
+  --color-ivory: var(--ivory);
+  --color-ivory-soft: var(--ivory-soft);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-deep: var(--gold-deep);
+  --color-line-dark: var(--line-dark);
+  --color-line-light: var(--line-light);
+  --color-muted-dark: var(--muted-on-dark);
+  --color-muted-light: var(--muted-on-light);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: initial;
+  /* clip (not hidden) so no scroll container is created and position:sticky still works */
+  overflow-x: clip;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* ---------- primitives ---------- */
+.container-site {
+  padding-inline: var(--container-pad);
+  width: 100%;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-mono-brand {
+  font-family: var(--font-mono);
+}
+
+.text-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.text-hero-h {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.text-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Pre-hide animated elements only when JS is present and motion is allowed.
+   The .anim-ready class is set by an inline head script before first paint. */
+.anim-ready [data-anim-hidden] {
+  visibility: hidden;
+}
+.anim-ready [data-anim-fade] {
+  opacity: 0;
+}
+
+/* focus */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* underline link animation */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* text flip button (double label slides up on hover) */
+.flip-label {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.flip-label > span {
+  display: block;
+  transition: transform 0.55s var(--ease-out-expo);
+}
+.flip-label > span:nth-child(2) {
+  position: absolute;
+  inset: 0;
+  transform: translateY(110%);
+}
+a:hover .flip-label > span:first-child,
+button:hover .flip-label > span:first-child {
+  transform: translateY(-110%);
+}
+a:hover .flip-label > span:nth-child(2),
+button:hover .flip-label > span:nth-child(2) {
+  transform: translateY(0);
+}
+
+/* marquee */
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x var(--marquee-dur, 40s) linear infinite;
+}
+.marquee-track.reverse {
+  animation-direction: reverse;
+}
+
+/* grain overlay for premium texture */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* hide scrollbar utility for horizontal scrollers */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* shared liquid-metal button surface */
+.liquid-metal-button {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.55),
+    0 16px 9px rgba(0, 0, 0, 0.08),
+    0 7px 6px rgba(0, 0, 0, 0.14),
+    0 2px 3px rgba(0, 0, 0, 0.24);
+}
+.liquid-metal-shader {
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, #292929 0%, #f1eee7 18%, #555 35%, #d0b77f 51%, #faf8f2 67%, #383838 84%, #9d8354 100%);
+  background-size: 220% 220%;
+  animation: liquid-metal-fallback 6s ease-in-out infinite alternate;
+}
+.liquid-metal-shader canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 999px !important;
+}
+@keyframes liquid-metal-fallback {
+  from { background-position: 0% 45%; }
+  to { background-position: 100% 55%; }
+}
+@keyframes liquid-metal-ripple {
+  from { transform: translate(-50%, -50%) scale(0); opacity: 0.68; }
+  to { transform: translate(-50%, -50%) scale(4.5); opacity: 0; }
+}
+.liquid-metal-ripple {
+  animation: liquid-metal-ripple 650ms ease-out forwards;
+}
+
+/* reduced motion: kill decorative animation */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
