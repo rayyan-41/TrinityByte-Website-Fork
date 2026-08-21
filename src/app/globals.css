@@ -307,3 +307,12 @@ button:hover .flip-label > span:nth-child(2) {
     close
   );
 }
+
+/* GSAP's SplitText line masks clip to the line box, and our display styles run
+   line-height below 1 — so descenders (g, y, p) fell outside it and got cut.
+   Grow the clip box downward and pull the same amount back off the flow, which
+   uncovers the descenders without moving a single line. */
+.split-line-mask {
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
