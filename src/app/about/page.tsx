@@ -41,11 +41,11 @@ export default function AboutPage() {
             <Reveal className="lg:col-span-5">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--card-radius)]">
                 <Image
-                  src="/brand/t-mark-metallic.jpg"
+                  src="/brand/TB_logo_no_bg.png"
                   alt="The TrinityByte monogram rendered in brushed champagne metal"
                   fill
                   sizes="(max-width: 1024px) 90vw, 45vw"
-                  className="object-cover"
+                  className="object-contain p-12"
                 />
               </div>
             </Reveal>

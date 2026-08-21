@@ -292,3 +292,18 @@ button:hover .flip-label > span:nth-child(2) {
     scroll-behavior: auto !important;
   }
 }
+
+/* Top-center brand badge: trapezoid notch with rounded bottom corners. The
+   polygon is a fallback — browsers without shape() keep the sharp corners. */
+.brand-notch {
+  clip-path: polygon(0 0, 100% 0, calc(100% - 22px) 100%, 22px 100%);
+  clip-path: shape(
+    from 0 0,
+    line to 100% 0,
+    line to calc(100% - 17.4px) calc(100% - 8.9px),
+    curve to calc(100% - 32px) 100% with calc(100% - 22px) 100%,
+    line to 32px 100%,
+    curve to 17.4px calc(100% - 8.9px) with 22px 100%,
+    close
+  );
+}

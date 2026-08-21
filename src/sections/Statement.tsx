@@ -58,11 +58,11 @@ export function Statement() {
       {/* floating brand cards */}
       <div data-float-card className="pointer-events-none absolute left-[4%] top-[2%] hidden w-[230px] overflow-hidden rounded-2xl lg:block">
         <Image
-          src="/brand/t-mark-metallic.jpg"
+          src="/brand/TB_logo_no_bg.png"
           alt=""
-          width={460}
-          height={452}
-          className="h-auto w-full object-cover"
+          width={506}
+          height={493}
+          className="h-auto w-full object-contain p-6"
         />
       </div>
       <div

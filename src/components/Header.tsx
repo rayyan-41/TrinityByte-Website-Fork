@@ -43,14 +43,14 @@ export function Header() {
       <div className="pointer-events-none fixed inset-x-0 top-0 z-[60] flex justify-center">
         <Link
           href="/"
-          aria-label="TrinityByte â€” home"
+          aria-label="TrinityByte — home"
           onClick={() => toggle(false)}
-          className="pointer-events-auto flex h-[42px] items-center gap-2 bg-ivory px-5 pb-2 pt-1.5 sm:h-[46px] sm:gap-2.5 sm:px-7"
-          style={{ clipPath: "polygon(0 0, 100% 0, calc(100% - 22px) 100%, 22px 100%)" }}
+          className="brand-notch pointer-events-auto flex h-[42px] items-center bg-ivory px-5 pb-2 pt-1.5 sm:h-[46px] sm:px-7"
         >
-          <TMark className="h-[15px] w-[15px] text-ink sm:h-[17px] sm:w-[17px]" />
+          {/* the mark stands in for the leading T, so it sizes off the font */}
           <span className="font-display text-[15px] font-semibold leading-none tracking-[-0.02em] text-ink sm:text-[17px]">
-            TRINITYBYTE
+            <TMark className="inline-block h-[1.19em] -ml-[0.16em] -mr-[0.18em] align-[-0.213em]" />
+            RINITYBYTE
           </span>
         </Link>
       </div>

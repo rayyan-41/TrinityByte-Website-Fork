@@ -128,7 +128,7 @@ and it appears in the homepage scroll-morph showcase, the `/work` index, and the
 
 | Asset | Location |
 |---|---|
-| Brand mark (metallic T) | `public/brand/t-mark-metallic.jpg` |
+| Brand mark (metallic T) | `public/brand/TB_logo_no_bg.png` |
 | Project covers / galleries | Create `public/work/<slug>/` and reference the paths from `projects.ts` |
 | Favicon / app icon | `src/app/icon.svg` |
 

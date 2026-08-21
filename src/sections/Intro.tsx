@@ -7,21 +7,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { PillButton } from "@/components/ui/PillButton";
 import { Reveal } from "@/components/anim/Reveal";
+import { TMark } from "@/components/ui/Logo";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
-
-function TMarkOutline({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 96 96" className={className} fill="none" stroke="currentColor" strokeWidth="1.1" aria-hidden="true">
-      <rect x="4" y="16" width="36" height="9" />
-      <rect x="56" y="16" width="36" height="9" />
-      <rect x="4" y="31" width="36" height="9" />
-      <rect x="56" y="31" width="36" height="9" />
-      <rect x="43" y="16" width="4.6" height="66" />
-      <rect x="48.4" y="16" width="4.6" height="66" />
-    </svg>
-  );
-}
 
 const STATEMENT =
   "We're a hybrid software house built on one belief — every great idea deserves exceptional execution.";
@@ -80,11 +68,11 @@ export function Intro() {
         <Reveal className="md:col-span-4 lg:col-span-3">
           <div className="group relative aspect-[4/3] w-full max-w-[380px] overflow-hidden rounded-2xl">
             <Image
-              src="/brand/t-mark-metallic.jpg"
+              src="/brand/TB_logo_no_bg.png"
               alt="The TrinityByte monogram — a brushed-metal triple-T mark in champagne gold"
               fill
               sizes="(max-width: 768px) 90vw, 380px"
-              className="object-cover transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-[1.06]"
+              className="object-contain p-10 transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-[1.06]"
             />
           </div>
         </Reveal>
@@ -106,9 +94,9 @@ export function Intro() {
 
         <div
           data-intro-mark
-          className="pointer-events-none absolute -right-4 -top-10 hidden text-gold/60 lg:block"
+          className="pointer-events-none absolute -right-4 -top-10 hidden opacity-60 lg:block"
         >
-          <TMarkOutline className="h-[190px] w-[190px]" />
+          <TMark className="h-[190px] w-[190px]" />
         </div>
       </div>
     </section>

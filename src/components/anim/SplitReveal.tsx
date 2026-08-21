@@ -18,6 +18,11 @@ type Props = {
   start?: string;
   /** play immediately on mount instead of on scroll */
   immediate?: boolean;
+  /**
+   * Selector for elements SplitText should fold into the adjacent word rather
+   * than split around — an inline <img>/icon otherwise becomes its own line.
+   */
+  ignore?: string;
 };
 
 /** Masked line/word rise — the signature editorial text reveal. */
@@ -30,6 +35,7 @@ export function SplitReveal({
   stagger = 0.09,
   start = "top 86%",
   immediate = false,
+  ignore,
 }: Props) {
   const ref = useRef<HTMLElement>(null);
 
@@ -47,6 +53,7 @@ export function SplitReveal({
       split = new SplitText(el, {
         type: mode === "lines" ? "lines" : "words",
         linesClass: "split-line",
+        ignore,
         mask: mode === "lines" ? "lines" : "words",
       });
       const targets = mode === "lines" ? split.lines : split.words;
@@ -70,7 +77,7 @@ export function SplitReveal({
       split?.revert();
       ctx.revert();
     };
-  }, [mode, delay, stagger, start, immediate]);
+  }, [mode, delay, stagger, start, immediate, ignore]);
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

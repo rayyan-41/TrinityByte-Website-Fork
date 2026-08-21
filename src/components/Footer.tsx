@@ -87,13 +87,19 @@ export function Footer() {
       </div>
 
       {/* giant wordmark — sized to run the full container width */}
-      <div className="container-site overflow-hidden pb-[clamp(18px,2.2vw,36px)] pt-[clamp(40px,6vw,90px)]">
+      <div
+        aria-hidden="true"
+        className="container-site overflow-hidden pb-[clamp(18px,2.2vw,36px)] pt-[clamp(40px,6vw,90px)]"
+      >
         <SplitReveal
           as="p"
           mode="lines"
-          className="select-none whitespace-nowrap text-center font-display text-[clamp(52px,20.4vw,300px)] font-semibold leading-[0.92] tracking-[-0.05em] text-ink"
+          ignore=".wordmark-mark"
+          className="select-none whitespace-nowrap text-center font-display text-[clamp(52px,19.1vw,300px)] font-semibold leading-[0.92] tracking-[-0.05em] text-ink"
         >
-          TrinityByte
+          {/* the mark stands in for the leading T, so it sizes off the font */}
+          <TMark className="wordmark-mark inline-block h-[1.19em] -ml-[0.245em] -mr-[0.19em] align-[-0.213em]" />
+          rinityByte
         </SplitReveal>
       </div>
     </footer>
