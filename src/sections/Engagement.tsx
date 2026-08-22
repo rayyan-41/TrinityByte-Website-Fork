@@ -58,7 +58,6 @@ export function Engagement() {
       <div className="container-site flex items-center justify-between border-t border-line-dark pt-5">
         <p className="label-mono text-muted-dark">
           <span className="text-gold">©</span> Engagement models{" "}
-          <span className="ml-1 text-gold/80">ماڈل</span>
         </p>
         <p className="label-mono hidden text-muted-dark md:block">(TBX® — 07)</p>
         <p className="label-mono text-muted-dark">Custom quotes</p>

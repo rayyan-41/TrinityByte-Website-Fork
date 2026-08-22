@@ -79,10 +79,10 @@ export const services: Service[] = [
 ];
 
 export const technologies = [
-  { group: "Frontend", items: ["HTML5", "CSS3", "JavaScript", "React"] },
-  { group: "Backend", items: ["Java", "Python", "Node.js", "PHP"] },
+  { group: "Frontend", items: ["HTML5", "CSS3", "JavaScript", "React", "Next.js"] },
+  { group: "Backend", items: ["Java", "FastAPI", "Node.js", "PHP"] },
   { group: "Databases", items: ["MySQL", "PostgreSQL", "MongoDB"] },
-  { group: "Mobile", items: ["Flutter", "React Native"] },
+  { group: "Mobile", items: ["Flutter", "React Native", "Swift", "Kotlin"] },
   { group: "Tools", items: ["Git", "GitHub", "Docker", "Linux"] },
 ];
 
