@@ -16,6 +16,8 @@ interface TeamSectionProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
   description: string;
   members: TeamSectionMember[];
+  /** Card that gets the light treatment and the centre column on md+. */
+  featuredIndex?: number;
   actionHref?: string;
   actionLabel?: string;
   logo?: React.ReactNode;
@@ -28,6 +30,7 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
       title,
       description,
       members,
+      featuredIndex = 1,
       actionHref,
       actionLabel = "Start a Project",
       logo,
@@ -36,6 +39,16 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
     },
     ref
   ) => {
+    // On md+ the featured card takes the centre column and the others keep their
+    // relative order around it. Below md the grid is a single column, so DOM
+    // order wins — which is why the markup stays in the natural reading order.
+    const others = members.map((_, i) => i).filter((i) => i !== featuredIndex);
+    /** Left-to-right slot the card lands in once the grid goes horizontal. */
+    const column = (index: number) =>
+      index === featuredIndex ? 1 : others.indexOf(index) === 0 ? 0 : others.indexOf(index) + 1;
+    const MD_ORDER = ["md:order-1", "md:order-2", "md:order-3"];
+    const pad = (n: number) => String(n + 1).padStart(2, "0");
+
     return (
       <section
         ref={ref}
@@ -74,36 +87,40 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
           </div>
 
           <div className="mt-[clamp(52px,7vw,96px)] grid gap-4 md:grid-cols-3 lg:gap-5">
-            {members.map((member, index) => (
+            {members.map((member, index) => {
+              const isFeatured = index === featuredIndex;
+              return (
               <article
                 key={member.name}
                 data-team-card
-                className={`group relative flex min-h-[540px] flex-col overflow-hidden rounded-[var(--card-radius)] border p-[clamp(24px,2.5vw,38px)] shadow-[0_34px_90px_rgba(0,0,0,.28)] transition-[transform,border-color] duration-500 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-2 focus-within:-translate-y-2 md:min-h-[620px] ${
-                  index === 1
+                className={`group relative flex min-h-[540px] flex-col overflow-hidden rounded-[var(--card-radius)] border p-[clamp(24px,2.5vw,38px)] shadow-[0_34px_90px_rgba(0,0,0,.28)] transition-[transform,border-color] duration-500 [transition-timing-function:var(--ease-out-expo)] hover:-translate-y-2 focus-within:-translate-y-2 md:min-h-[620px] ${MD_ORDER[Math.min(column(index), 2)]} ${
+                  isFeatured
                     ? "border-black/10 bg-ivory text-ink"
                     : "border-white/10 bg-[#0d0d0f] text-ivory"
                 }`}
               >
                 <div
                   className={`absolute inset-x-0 bottom-0 h-[58%] origin-bottom scale-y-0 rounded-t-[50%] transition-transform duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-y-100 group-focus-within:scale-y-100 ${
-                    index === 1
+                    isFeatured
                       ? "bg-gradient-to-t from-gold/35 to-transparent"
                       : "bg-gradient-to-t from-gold/[0.16] to-transparent"
                   }`}
                 />
 
                 <div className="relative z-10 flex items-start justify-between gap-4">
-                  <p className={`label-mono ${index === 1 ? "text-ink/48" : "text-gold"}`}>
+                  <p className={`label-mono ${isFeatured ? "text-ink/48" : "text-gold"}`}>
                     {member.designation}
                   </p>
-                  <span className={`font-mono-brand text-[11px] ${index === 1 ? "text-ink/38" : "text-ivory/28"}`}>
-                    {String(index + 1).padStart(2, "0")}
+                  {/* counts down the stack on mobile, across the row on md+ */}
+                  <span className={`font-mono-brand text-[11px] ${isFeatured ? "text-ink/38" : "text-ivory/28"}`}>
+                    <span className="md:hidden">{pad(index)}</span>
+                    <span className="hidden md:inline">{pad(column(index))}</span>
                   </span>
                 </div>
 
                 <div
                   className={`relative z-10 mx-auto mt-9 flex h-[clamp(178px,16vw,236px)] w-[clamp(178px,16vw,236px)] items-center justify-center overflow-hidden rounded-full border transition-[transform,border-color] duration-700 [transition-timing-function:var(--ease-out-expo)] group-hover:scale-[1.05] ${
-                    index === 1
+                    isFeatured
                       ? "border-ink/15 bg-ink/[0.035] text-gold-deep group-hover:border-gold-deep/55"
                       : "border-white/12 bg-white/[0.025] text-gold group-hover:border-gold/50"
                   }`}
@@ -122,7 +139,7 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
                       <span className="relative font-display text-[clamp(54px,6vw,86px)] font-semibold tracking-[-0.07em] text-current">
                         {member.initials}
                       </span>
-                      <span className={`absolute bottom-5 font-mono-brand text-[7px] uppercase tracking-[0.22em] ${index === 1 ? "text-ink/34" : "text-ivory/30"}`}>
+                      <span className={`absolute bottom-5 font-mono-brand text-[7px] uppercase tracking-[0.22em] ${isFeatured ? "text-ink/34" : "text-ivory/30"}`}>
                         Portrait
                       </span>
                     </>
@@ -133,11 +150,11 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
                   <h3 className="max-w-[390px] font-display text-[clamp(27px,2.7vw,41px)] font-semibold leading-[1.02] tracking-[-0.04em]">
                     {member.name}
                   </h3>
-                  <p className={`mt-4 text-[14.5px] leading-[1.58] ${index === 1 ? "text-ink/62" : "text-ivory/62"}`}>
+                  <p className={`mt-4 text-[14.5px] leading-[1.58] ${isFeatured ? "text-ink/62" : "text-ivory/62"}`}>
                     {member.description}
                   </p>
                   {member.points && (
-                    <ul className={`mt-6 grid gap-2 border-t pt-5 ${index === 1 ? "border-black/10" : "border-white/10"}`}>
+                    <ul className={`mt-6 grid gap-2 border-t pt-5 ${isFeatured ? "border-black/10" : "border-white/10"}`}>
                       {member.points.slice(0, 2).map((point) => (
                         <li key={point} className="flex items-center gap-2.5 text-[12px] font-medium">
                           <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
@@ -148,7 +165,8 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
                   )}
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

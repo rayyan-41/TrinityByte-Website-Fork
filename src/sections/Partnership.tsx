@@ -71,6 +71,7 @@ export function Partnership() {
         title="Built Together. Led With Purpose."
         description="Meet the founding partners shaping TrinityByte—combining product vision, technical craft, and a shared commitment to building technology that creates lasting value."
         members={companyPartners}
+        featuredIndex={0}
         actionHref="/about"
         actionLabel="About TrinityByte"
         logo={<TMark className="h-10 w-10" />}
