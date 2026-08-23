@@ -98,6 +98,13 @@ export const leadership = [
     quote:
       "Sound legal foundations let great ideas grow without fear — that's what we build here.",
   },
+  {
+    initials: "SR",
+    role: "CMO",
+    name: "Shafay Rashid",
+    quote:
+      "Great engineering still needs an audience — I build the presence that turns attention into partnerships.",
+  },
 ];
 
 export const roadmap = [
