@@ -58,7 +58,14 @@ export function Process() {
         </div>
       </div>
 
+      {/*
+        The title block drifts up 100px on scroll (see ContainerScroll), which
+        used to carry the heading over the label bar above it. This clears the
+        drift with room to spare — mobile needs more because its resting gap is
+        smaller and all three labels are visible there.
+      */}
       <ContainerScroll
+        className="mt-24 md:mt-16"
         titleComponent={
           <div className="px-5">
             <h2 className="mx-auto max-w-[760px] font-display text-[clamp(34px,4.5vw,64px)] font-semibold leading-[1.02] tracking-[-0.04em] text-ink">
