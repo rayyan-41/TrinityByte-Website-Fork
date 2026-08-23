@@ -67,6 +67,16 @@ export function Footer() {
               </li>
               <li>
                 <a
+                  href={site.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="link-underline inline-flex min-h-[34px] items-center text-ink/85 hover:text-ink"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
                   href={`mailto:${site.email}`}
                   className="link-underline inline-flex min-h-[34px] items-center text-ink/85 hover:text-ink"
                 >

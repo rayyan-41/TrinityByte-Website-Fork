@@ -77,7 +77,10 @@ const orgJsonLd = {
   slogan: "Your Vision. Our Code. Real Results.",
   description:
     "TrinityByte is a modern hybrid software house delivering innovative, scalable, and high-performance software solutions for businesses across Pakistan and international markets.",
-  sameAs: ["https://linkedin.com/company/trinitybyte"],
+  sameAs: [
+    "https://linkedin.com/company/trinitybyte",
+    "https://www.instagram.com/trinitybyte_",
+  ],
 };
 
 export default function RootLayout({

@@ -9,6 +9,8 @@ export const site = {
   email: "contact@trinitybyte.org",
   linkedin: "https://linkedin.com/company/trinitybyte",
   linkedinLabel: "linkedin.com/company/trinitybyte",
+  instagram: "https://www.instagram.com/trinitybyte_",
+  instagramLabel: "@trinitybyte_",
   workplace: "Hybrid Workplace · Worldwide",
   established: "2026",
   url: "https://trinitybyte.org",
