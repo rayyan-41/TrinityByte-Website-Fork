@@ -66,7 +66,7 @@ export function TechIndustries() {
           <p className="label-mono text-muted-dark">
             <span className="text-gold">©</span> Our stack
           </p>
-          <p className="label-mono hidden text-muted-dark md:block">(TBX® — 03)</p>
+          <p className="label-mono hidden text-muted-dark md:block">(03)</p>
           <p className="label-mono text-muted-dark">Battle-tested tools</p>
         </div>
 

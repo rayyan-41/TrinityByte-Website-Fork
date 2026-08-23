@@ -59,7 +59,7 @@ export function Engagement() {
         <p className="label-mono text-muted-dark">
           <span className="text-gold">©</span> Engagement models{" "}
         </p>
-        <p className="label-mono hidden text-muted-dark md:block">(TBX® — 07)</p>
+        <p className="label-mono hidden text-muted-dark md:block">(07)</p>
         <p className="label-mono text-muted-dark">Custom quotes</p>
       </div>
 

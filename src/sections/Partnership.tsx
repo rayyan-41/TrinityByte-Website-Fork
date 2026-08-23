@@ -68,7 +68,7 @@ export function Partnership() {
   return (
     <section ref={rootRef} className="relative bg-bg" aria-label="How we partner">
       <TeamSection
-        eyebrow="© Company partners · TBX 05"
+        eyebrow="© Company partners · 05"
         title="Built Together. Led With Purpose."
         description="Meet the founding partners shaping TrinityByte—combining product vision, technical craft, and a shared commitment to building technology that creates lasting value."
         members={companyPartners}

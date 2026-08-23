@@ -49,7 +49,7 @@ export default function WorkPage() {
       <main>
         <PageHero
           eyebrow="Featured projects"
-          kicker="(TBX® — 01)"
+          kicker="(01)"
           title="Selected builds."
           lead="Every project blends design and engineering — shaping bold ideas into sleek digital realities, built with intent, speed, and visual clarity."
         />
@@ -79,7 +79,7 @@ export default function WorkPage() {
             <p className="label-mono text-muted-dark">
               <span className="text-gold">©</span> What we can build for you
             </p>
-            <p className="label-mono text-muted-dark">(TBX® — 02)</p>
+            <p className="label-mono text-muted-dark">(02)</p>
           </div>
           <Reveal y={26}>
             <div className="mt-[clamp(32px,4vw,56px)]">

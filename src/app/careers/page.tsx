@@ -31,7 +31,7 @@ export default function CareersPage() {
       <main>
         <PageHero
           eyebrow="Join the team"
-          kicker="(TBX® — 01)"
+          kicker="(01)"
           title="Build the company, not just the product."
           lead="At TrinityByte you're not simply accepting a job — you're becoming part of a company building its future from the ground up. The people who help build this from day one should grow with it."
         >
@@ -58,7 +58,7 @@ export default function CareersPage() {
               <p className="label-mono text-muted-light">
                 <span className="text-gold-deep">©</span> Why join us
               </p>
-              <p className="label-mono text-muted-light">(TBX® — 02)</p>
+              <p className="label-mono text-muted-light">(02)</p>
             </div>
             <h2 className="mt-[clamp(32px,4vw,60px)] max-w-[760px] font-display text-[clamp(40px,5.4vw,78px)] font-semibold leading-[1.02] tracking-[-0.04em] text-ink">
               What you get here.
@@ -142,7 +142,7 @@ export default function CareersPage() {
             <p className="label-mono text-muted-dark">
               <span className="text-gold">©</span> Open positions
             </p>
-            <p className="label-mono text-muted-dark">(TBX® — 03)</p>
+            <p className="label-mono text-muted-dark">(03)</p>
           </div>
 
           <Reveal y={40}>
@@ -175,7 +175,7 @@ export default function CareersPage() {
             <p className="label-mono text-muted-dark">
               <span className="text-gold">©</span> Where we&rsquo;re heading
             </p>
-            <p className="label-mono text-muted-dark">(TBX® — 04)</p>
+            <p className="label-mono text-muted-dark">(04)</p>
           </div>
           <div className="mt-[clamp(32px,4vw,56px)] grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-4">
             {roadmap.map((r, i) => (

@@ -26,7 +26,7 @@ export default function AboutPage() {
       <main>
         <PageHero
           eyebrow="About us"
-          kicker="(TBX® — 01)"
+          kicker="(01)"
           title="Every great idea deserves exceptional execution."
           lead="TrinityByte is a modern hybrid software house dedicated to delivering innovative, scalable, and high-performance software solutions for businesses across Pakistan and international markets."
         >
@@ -83,7 +83,7 @@ export default function AboutPage() {
               <p className="label-mono text-muted-light">
                 <span className="text-gold-deep">©</span> Our foundation
               </p>
-              <p className="label-mono text-muted-light">(TBX® — 02)</p>
+              <p className="label-mono text-muted-light">(02)</p>
             </div>
 
             <div className="mt-[clamp(40px,5vw,72px)] grid grid-cols-1 gap-14 lg:grid-cols-2 lg:gap-20">
@@ -163,7 +163,7 @@ export default function AboutPage() {
             <p className="label-mono text-muted-dark">
               <span className="text-gold">©</span> The team
             </p>
-            <p className="label-mono text-muted-dark">(TBX® — 03)</p>
+            <p className="label-mono text-muted-dark">(03)</p>
           </div>
           <h2 className="mt-[clamp(32px,4vw,60px)] font-display text-[clamp(42px,6vw,86px)] font-semibold leading-[1.02] tracking-[-0.04em] text-ivory">
             Our leadership.
@@ -198,7 +198,7 @@ export default function AboutPage() {
             <p className="label-mono text-muted-dark">
               <span className="text-gold">©</span> Client focus
             </p>
-            <p className="label-mono text-muted-dark">(TBX® — 04)</p>
+            <p className="label-mono text-muted-dark">(04)</p>
           </div>
           <h2 className="mt-[clamp(32px,4vw,60px)] font-display text-[clamp(42px,6vw,86px)] font-semibold leading-[1.02] tracking-[-0.04em] text-ivory">
             Who we serve.
@@ -232,7 +232,7 @@ export default function AboutPage() {
               <p className="label-mono text-muted-light">
                 <span className="text-gold-deep">©</span> Our journey
               </p>
-              <p className="label-mono text-muted-light">(TBX® — 05)</p>
+              <p className="label-mono text-muted-light">(05)</p>
             </div>
             <h2 className="mt-[clamp(32px,4vw,60px)] max-w-[760px] font-display text-[clamp(40px,5.4vw,78px)] font-semibold leading-[1.02] tracking-[-0.04em] text-ink">
               Roadmap &amp; growth vision.

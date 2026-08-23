@@ -53,7 +53,7 @@ export function Process() {
           <p className="label-mono text-muted-light">
             <span className="text-gold-deep">©</span> How we work
           </p>
-          <p className="label-mono hidden text-muted-light md:block">(TBX® — 06)</p>
+          <p className="label-mono hidden text-muted-light md:block">(06)</p>
           <p className="label-mono text-muted-light">Seven stages</p>
         </div>
       </div>

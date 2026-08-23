@@ -201,7 +201,7 @@ function AIVisual() {
         </div>
         <div className="p-5 font-mono-brand text-[11px] leading-[2.1]">
           <p className="text-white/75">
-            <span className="text-gold">$</span> tbx run intake --watch
+            <span className="text-gold">$</span> intake --watch
           </p>
           <p className="text-white/85">→ documents scanned <span className="text-gold">·</span> 14 routed</p>
           <p className="text-white/85">→ approvals queued <span className="text-gold">·</span> 3 pending review</p>
@@ -287,7 +287,7 @@ export function Services() {
                 {/* text card */}
                 <article className="flex flex-col rounded-[var(--card-radius)] bg-gradient-to-br from-[#f5f2ec] to-[#e8e3d6] p-[clamp(24px,2.8vw,44px)]">
                   <p className="label-mono text-[#8a7c58]">
-                    Service {s.index} — TBX<span className="align-super text-[8px]">®</span>
+                    Service {s.index}
                   </p>
                   <h3 className="mt-3.5 font-display text-[clamp(27px,2.8vw,40px)] font-semibold leading-[1.05] tracking-[-0.03em] text-ink">
                     {s.title}

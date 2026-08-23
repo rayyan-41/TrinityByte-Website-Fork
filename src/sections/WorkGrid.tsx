@@ -29,7 +29,7 @@ function CoverShell({ p, children }: { p: Project; children: ReactNode }) {
         {children}
       </div>
       <span className="absolute left-5 top-5 font-mono-brand text-[10px] uppercase tracking-[0.2em] text-white/60">
-        TBX® — Representative build
+        Representative build
       </span>
       <span
         className="absolute bottom-5 right-5 rounded-full border px-3 py-1 font-mono-brand text-[10px] uppercase tracking-[0.16em]"
@@ -247,7 +247,7 @@ export function WorkGrid() {
         <p className="label-mono text-muted-dark">
           <span className="text-gold">©</span> Featured projects
         </p>
-        <p className="label-mono hidden text-muted-dark md:block">(TBX® — 04)</p>
+        <p className="label-mono hidden text-muted-dark md:block">(04)</p>
         <p className="label-mono text-muted-dark">Creative development</p>
       </div>
 

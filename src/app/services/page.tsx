@@ -23,7 +23,7 @@ export default function ServicesPage() {
       <main>
         <PageHero
           eyebrow="What we build"
-          kicker="(TBX® — 01)"
+          kicker="(01)"
           title="Five services. One accountable team."
           lead="From the first discovery call to long-term support, TrinityByte covers the full product lifecycle — strategy, design, engineering, and automation under one roof."
         >

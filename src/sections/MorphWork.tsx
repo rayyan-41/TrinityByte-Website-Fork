@@ -8,7 +8,7 @@ export function MorphWork() {
         <p className="label-mono text-muted-dark">
           <span className="text-gold">©</span> Featured projects
         </p>
-        <p className="label-mono hidden text-muted-dark md:block">(TBX® — 04)</p>
+        <p className="label-mono hidden text-muted-dark md:block">(04)</p>
         <p className="label-mono text-muted-dark">Creative development</p>
       </div>
 
