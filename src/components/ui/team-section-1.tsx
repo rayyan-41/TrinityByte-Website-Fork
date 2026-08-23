@@ -34,7 +34,10 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
       actionHref,
       actionLabel = "Start a Project",
       logo,
+      // rendered under the card grid; without destructuring it here the spread
+      // below would hand `children` to a <section> that already has its own
       className = "",
+      children,
       ...props
     },
     ref
@@ -168,6 +171,10 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
               );
             })}
           </div>
+
+          {children && (
+            <div className="mt-[clamp(36px,4vw,56px)] flex justify-center">{children}</div>
+          )}
         </div>
       </section>
     );

@@ -153,7 +153,12 @@ export default function AboutPage() {
         </section>
 
         {/* leadership */}
-        <section className="container-site bg-bg pb-[var(--section-gap)]" aria-label="Leadership">
+        {/* scroll-mt clears the fixed brand badge when linked to via /about#leadership */}
+        <section
+          id="leadership"
+          className="container-site scroll-mt-[clamp(72px,9vw,110px)] bg-bg pb-[var(--section-gap)]"
+          aria-label="Leadership"
+        >
           <div className="flex items-center justify-between border-t border-line-dark pt-5">
             <p className="label-mono text-muted-dark">
               <span className="text-gold">©</span> The team

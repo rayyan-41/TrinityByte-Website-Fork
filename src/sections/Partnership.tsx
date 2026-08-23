@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TeamSection } from "@/components/ui/team-section-1";
 import { TMark } from "@/components/ui/Logo";
+import { PillButton } from "@/components/ui/PillButton";
 import { leadership, startupAdvantage } from "@/data/company";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -75,7 +76,11 @@ export function Partnership() {
         actionHref="/about"
         actionLabel="About TrinityByte"
         logo={<TMark className="h-10 w-10" />}
-      />
+      >
+        <PillButton href="/about#leadership" tone="light">
+          Meet the Team
+        </PillButton>
+      </TeamSection>
 
       <div className="container-site pb-[var(--section-gap)]">
         <div className="grain relative overflow-hidden rounded-[var(--card-radius)] border border-gold/20 bg-gradient-to-br from-[#171410] to-[#0b0a08] p-[clamp(26px,3.5vw,52px)]">
