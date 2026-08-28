@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageHero } from "@/components/PageHero";
@@ -190,6 +191,16 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.1}>
+            <p className="mt-[clamp(32px,4vw,56px)] max-w-[560px] text-[15.5px] leading-[1.65] text-muted-dark">
+              This team is still being built.{" "}
+              <Link href="/careers" className="link-underline font-medium text-ivory">
+                See where you&rsquo;d fit
+              </Link>
+              .
+            </p>
+          </Reveal>
         </section>
 
         {/* who we serve */}

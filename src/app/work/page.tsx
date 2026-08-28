@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Bot, Boxes, Globe, Palette, Smartphone } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -62,7 +63,11 @@ export default function WorkPage() {
               <p className="text-[14px] leading-[1.55] text-ivory/75">
                 TrinityByte launched in 2026. The builds below are representative of our delivery
                 standards — client case studies will replace them as engagements complete and
-                approvals come through.
+                approvals come through. In the meantime,{" "}
+                <Link href="/services" className="link-underline font-medium text-ivory">
+                  see what we build
+                </Link>
+                .
               </p>
             </div>
           </Reveal>

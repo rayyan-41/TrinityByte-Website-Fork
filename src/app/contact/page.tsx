@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ContactForm } from "@/components/ContactForm";
@@ -93,6 +94,17 @@ export default function ContactPage() {
                         </li>
                       ))}
                     </ol>
+                    <p className="mt-5 text-[13.5px] leading-[1.55] text-muted-dark">
+                      Three of seven stages —{" "}
+                      <Link href="/services#process" className="link-underline text-ivory">
+                        see the full process
+                      </Link>
+                      , or{" "}
+                      <Link href="/work" className="link-underline text-ivory">
+                        browse recent builds
+                      </Link>
+                      .
+                    </p>
                   </div>
 
                   <div className="grain relative mt-10 overflow-hidden rounded-2xl border border-gold/25 bg-gradient-to-br from-[#15130e] to-[#0a0a08] p-6">
