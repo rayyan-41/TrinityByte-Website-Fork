@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -8,9 +9,16 @@ import { nav } from "@/data/site";
 
 /**
  * Catches every unmatched URL (Next serves this for the whole app).
- * No metadata export — that is only supported on `global-not-found`, and Next
- * injects `noindex` on 404 responses for us.
+ * Next injects `noindex` on 404 responses, so no robots directive is needed —
+ * but the title and canonical are inherited from the root layout unless set
+ * here, which would otherwise make every dead URL claim to be the home page.
  */
+export const metadata: Metadata = {
+  title: "Page not found",
+  description: "That page doesn't exist. Browse TrinityByte's services, work, and team instead.",
+  alternates: { canonical: null },
+};
+
 export default function NotFound() {
   // "Home" is already the primary CTA above, so the list offers the rest.
   const destinations = nav.filter((n) => n.href !== "/");
