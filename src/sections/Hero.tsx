@@ -256,18 +256,36 @@ export function Hero() {
         return;
       }
 
+      // The scrubbed timeline below also owns these elements. If the page is already
+      // scrolled when we mount (restored scroll, back nav, in-app browser resuming the
+      // tab) or the visitor scrolls while the intro is still delayed, this entrance
+      // would land after the scrub and paint the intro back over the scrolled state.
+      const intro = gsap.timeline({ paused: true });
       if (introSplit) {
-        gsap.fromTo(
+        intro.fromTo(
           introSplit.lines,
           { yPercent: 118 },
-          { yPercent: 0, duration: 1.25, stagger: 0.1, ease: "expo.out", delay: 0.25 }
+          { yPercent: 0, duration: 1.25, stagger: 0.1, ease: "expo.out" },
+          0.25
         );
       }
-      gsap.fromTo(
+      intro.fromTo(
         "[data-hero-fade]",
         { autoAlpha: 0, y: 24 },
-        { autoAlpha: 1, y: 0, duration: 0.95, stagger: 0.08, ease: "power3.out", delay: 0.68 }
+        { autoAlpha: 1, y: 0, duration: 0.95, stagger: 0.08, ease: "power3.out" },
+        0.68
       );
+
+      if (window.scrollY > 2) {
+        intro.progress(1);
+      } else {
+        // ponytail: kill without writing a final state — the scrub has already
+        // rendered the correct one, and any write here would land on top of it.
+        const handOver = () => intro.kill();
+        window.addEventListener("scroll", handOver, { once: true, passive: true });
+        intro.eventCallback("onComplete", () => window.removeEventListener("scroll", handOver));
+        intro.play();
+      }
 
       const media = root.querySelector<HTMLElement>("[data-media-plane]");
       const planes = gsap.utils.toArray<HTMLElement>("[data-stack-plane]");
