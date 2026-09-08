@@ -5,22 +5,12 @@ import { site } from "@/data/site";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 /**
- * ============================================================
- * CONTACT FORM — NO BACKEND CONNECTED
- * ============================================================
- * Validation runs client-side only. Nothing is transmitted, and
- * the UI says so rather than faking a "message sent" state.
- *
- * TO CONNECT A REAL ENDPOINT:
- *   1. Create src/app/api/contact/route.ts with a POST handler
- *      (send mail via Resend / SendGrid / Nodemailer, or forward
- *      to a form service such as Formspree or Basin).
- *   2. Set ENDPOINT below to "/api/contact" (or the service URL).
- *   3. The submit handler already POSTs JSON and handles
- *      success/error — no other change is needed.
- * ============================================================
+ * Posts the brief to src/app/api/contact/route.ts, which mails it on via Resend.
+ * Validation here is for the visitor; the route re-validates the same rules
+ * because it is a public endpoint. A missing RESEND_API_KEY makes the route
+ * return 503, which surfaces as the "error" state below.
  */
-const ENDPOINT: string | null = null;
+const ENDPOINT = "/api/contact";
 
 const PROJECT_TYPES = [
   "Custom Software",
@@ -42,7 +32,7 @@ const BUDGETS = [
 const TIMELINES = ["ASAP", "1–3 months", "3–6 months", "6+ months", "Exploring options"];
 
 type Errors = Partial<Record<string, string>>;
-type Status = "idle" | "submitting" | "ok" | "error" | "no-endpoint";
+type Status = "idle" | "submitting" | "ok" | "error";
 
 const fieldBase =
   "w-full rounded-xl border bg-white/[0.03] px-4 py-3.5 text-[15px] text-ivory placeholder:text-ivory/35 transition-colors duration-300 focus:border-gold focus:outline-none";
@@ -94,11 +84,6 @@ export function ContactForm() {
     if (Object.keys(found).length > 0) {
       const firstKey = Object.keys(found)[0];
       form.querySelector<HTMLElement>(`[name="${firstKey}"]`)?.focus();
-      return;
-    }
-
-    if (!ENDPOINT) {
-      setStatus("no-endpoint");
       return;
     }
 
@@ -300,23 +285,6 @@ export function ContactForm() {
 
       {/* status region */}
       <div aria-live="polite" className="mt-6">
-        {status === "no-endpoint" && (
-          <div className="rounded-xl border border-gold/35 bg-gold/[0.07] px-5 py-4">
-            <p className="label-mono text-gold">Form validated — delivery not yet connected</p>
-            <p className="mt-2 text-[14px] leading-[1.6] text-ivory/80">
-              Your details passed validation, but no backend endpoint is configured yet, so nothing
-              was sent. Please email{" "}
-              <a href={`mailto:${site.email}`} className="link-underline text-gold">
-                {site.email}
-              </a>{" "}
-              directly. Developers: see the setup notes at the top of{" "}
-              <code className="rounded bg-black/40 px-1.5 py-0.5 font-mono-brand text-[12px] text-gold">
-                src/components/ContactForm.tsx
-              </code>
-              .
-            </p>
-          </div>
-        )}
         {status === "ok" && (
           <div className="rounded-xl border border-gold/35 bg-gold/[0.07] px-5 py-4">
             <p className="label-mono text-gold">Brief received</p>

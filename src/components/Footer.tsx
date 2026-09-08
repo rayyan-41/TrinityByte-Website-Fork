@@ -91,6 +91,14 @@ export function Footer() {
                   Careers
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/privacy"
+                  className="link-underline inline-flex min-h-[34px] items-center text-ink/85 hover:text-ink"
+                >
+                  Privacy
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
