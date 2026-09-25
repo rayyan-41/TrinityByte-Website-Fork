@@ -31,7 +31,6 @@ export default function CareersPage() {
       <main>
         <PageHero
           eyebrow="Join the team"
-          kicker="(01)"
           title="Build the company, not just the product."
           lead="At TrinityByte you're not simply accepting a job — you're becoming part of a company building its future from the ground up. The people who help build this from day one should grow with it."
         >
@@ -54,11 +53,10 @@ export default function CareersPage() {
         {/* what you get */}
         <section className="bg-ivory py-[var(--section-gap)] text-ink" aria-label="Why join TrinityByte">
           <div className="container-site">
-            <div className="flex items-center justify-between border-t border-line-light pt-5">
-              <p className="label-mono text-muted-light">
+            <div className="flex items-center border-t border-line-light pt-5">
+              <p className="label-mono label-lead text-muted-light">
                 <span className="text-gold-deep">©</span> Why join us
               </p>
-              <p className="label-mono text-muted-light">(02)</p>
             </div>
             <h2 className="mt-[clamp(32px,4vw,60px)] max-w-[760px] font-display text-[clamp(40px,5.4vw,78px)] font-semibold leading-[1.02] tracking-[-0.04em] text-ink">
               What you get here.
@@ -138,11 +136,10 @@ export default function CareersPage() {
 
         {/* open roles — honest empty state */}
         <section className="container-site bg-bg pb-[var(--section-gap)]" aria-label="Open positions">
-          <div className="flex items-center justify-between border-t border-line-dark pt-5">
-            <p className="label-mono text-muted-dark">
+          <div className="flex items-center border-t border-line-dark pt-5">
+            <p className="label-mono label-lead text-muted-dark">
               <span className="text-gold">©</span> Open positions
             </p>
-            <p className="label-mono text-muted-dark">(03)</p>
           </div>
 
           <Reveal y={40}>
@@ -171,11 +168,10 @@ export default function CareersPage() {
 
         {/* growth path */}
         <section className="container-site bg-bg pb-[var(--section-gap)]" aria-label="Where we're heading">
-          <div className="flex items-center justify-between border-t border-line-dark pt-5">
-            <p className="label-mono text-muted-dark">
+          <div className="flex items-center border-t border-line-dark pt-5">
+            <p className="label-mono label-lead text-muted-dark">
               <span className="text-gold">©</span> Where we&rsquo;re heading
             </p>
-            <p className="label-mono text-muted-dark">(04)</p>
           </div>
           <div className="mt-[clamp(32px,4vw,56px)] grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-4">
             {roadmap.map((r, i) => (

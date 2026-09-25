@@ -31,7 +31,7 @@ const sections: Section[] = [
     body: (
       <>
         <p>
-          TrinityByte is a hybrid software house based in Karachi, Pakistan, working with clients
+          TrinityByte is a hybrid software house based in Islamabad, Pakistan, working with clients
           worldwide. We are responsible for the personal data described on this page.
         </p>
         <p>
@@ -170,7 +170,6 @@ export default function PrivacyPage() {
       <main>
         <PageHero
           eyebrow="Privacy"
-          kicker="(01)"
           title="What we collect, and what we don't."
           lead="Most privacy policies are written to cover the company. This one is written so you can tell, in about two minutes, exactly what happens to anything you send us."
         />

@@ -29,7 +29,6 @@ export default function NotFound() {
       <main>
         <PageHero
           eyebrow="Page not found"
-          kicker="(404)"
           title="This page isn't part of the build."
           lead="The link may be mistyped, or the page may have moved since it was last shared. Everything else is exactly where you left it."
         >
@@ -42,12 +41,9 @@ export default function NotFound() {
           className="container-site bg-bg pb-[var(--section-gap)]"
           aria-label="Where to go instead"
         >
-          <div className="flex items-center justify-between border-t border-line-dark pt-5">
-            <p className="label-mono text-muted-dark">
+          <div className="flex items-center border-t border-line-dark pt-5">
+            <p className="label-mono label-lead text-muted-dark">
               <span className="text-gold">©</span> Try one of these
-            </p>
-            <p className="label-mono hidden text-muted-dark md:block">
-              {String(destinations.length).padStart(2, "0")} destinations
             </p>
           </div>
 

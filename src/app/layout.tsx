@@ -101,10 +101,12 @@ export default function RootLayout({
           runs before first paint, so if scripting is off or the user prefers
           reduced motion the content simply renders visible and never depends on
           React hydration to appear.
+          On "/" it also marks the hero as active so the header starts hidden
+          instead of flashing in and then out (Hero.tsx takes over from there).
         */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('anim-ready')}}catch(e){}`,
+            __html: `try{var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('anim-ready')}if(location.pathname==='/'){d.setAttribute('data-hero-active','')}}catch(e){}`,
           }}
         />
       </head>

@@ -71,7 +71,7 @@ export const TeamSection = React.forwardRef<HTMLElement, TeamSectionProps>(
         <div className="container-site relative z-10">
           <div data-team-header className="grid gap-8 border-t border-line-dark pt-6 lg:grid-cols-[1fr_0.78fr] lg:items-end">
             <div>
-              <p className="label-mono text-gold">{eyebrow}</p>
+              <p className="label-mono label-lead text-gold">{eyebrow}</p>
               <h2 className="mt-4 max-w-[900px] font-display text-[clamp(50px,8vw,116px)] font-semibold leading-[0.92] tracking-[-0.055em] text-ivory">
                 {title}
               </h2>

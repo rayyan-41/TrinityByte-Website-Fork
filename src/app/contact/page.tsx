@@ -26,11 +26,10 @@ export default function ContactPage() {
           <div className="pointer-events-none absolute left-[-10%] top-[30%] h-[520px] w-[520px] rounded-full bg-[radial-gradient(closest-side,rgba(200,171,114,0.1),transparent)]" />
 
           <div className="container-site relative">
-            <div className="flex items-center justify-between border-b border-line-dark pb-5">
-              <p className="label-mono text-muted-dark">
+            <div className="flex items-center border-b border-line-dark pb-5">
+              <p className="label-mono label-lead text-muted-dark">
                 <span className="text-gold">©</span> Start a project
               </p>
-              <p className="label-mono text-muted-dark">Est. {site.established}</p>
             </div>
 
             <SplitReveal

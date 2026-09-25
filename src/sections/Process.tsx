@@ -49,12 +49,10 @@ export function Process() {
       id="process"
     >
       <div className="container-site">
-        <div className="flex items-center justify-between border-t border-line-light pt-5">
-          <p className="label-mono text-muted-light">
+        <div className="flex items-center border-t border-line-light pt-5">
+          <p className="label-mono label-lead text-muted-light">
             <span className="text-gold-deep">©</span> How we work
           </p>
-          <p className="label-mono hidden text-muted-light md:block">(06)</p>
-          <p className="label-mono text-muted-light">Seven stages</p>
         </div>
       </div>
 

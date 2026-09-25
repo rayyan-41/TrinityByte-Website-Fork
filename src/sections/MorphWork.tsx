@@ -4,12 +4,10 @@ import { PillButton } from "@/components/ui/PillButton";
 export function MorphWork() {
   return (
     <section className="bg-bg pb-[var(--section-gap)]" aria-label="Featured work" id="work">
-      <div className="container-site flex items-center justify-between border-t border-line-dark pt-5">
-        <p className="label-mono text-muted-dark">
+      <div className="container-site flex items-center border-t border-line-dark pt-5">
+        <p className="label-mono label-lead text-muted-dark">
           <span className="text-gold">©</span> Featured projects
         </p>
-        <p className="label-mono hidden text-muted-dark md:block">(04)</p>
-        <p className="label-mono text-muted-dark">Creative development</p>
       </div>
 
       <div className="container-site grid gap-10 pb-[clamp(52px,7vw,100px)] pt-[clamp(50px,7vw,104px)] md:grid-cols-12 md:items-end">

@@ -10,7 +10,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # TrinityByte website
 
-Marketing site for TrinityByte, a hybrid software house in Karachi. Live at
+Marketing site for TrinityByte, a hybrid software house in Islamabad. Live at
 trinitybyte.org on Vercel. Next.js 16 App Router, React 19, Tailwind v4,
 TypeScript strict. Animation is GSAP (ScrollTrigger + SplitText) with Lenis
 smooth scroll, plus framer-motion in a few components.
@@ -28,7 +28,9 @@ Copy splits in two, and knowing which half you need saves a lot of grep:
 
 Pages compose as `<Header />` + `<main>` + `<Footer />`; the root layout only
 supplies fonts, JSON-LD, and `SmoothScroll`. Inner pages open with `PageHero`.
-Each section has a label bar with a `(NN)` index — those numbers are manual.
+Each section opens with a single left-hand label (`label-mono label-lead`, e.g.
+"© Our stack"). The `(NN)` indices and right-hand kicker text were removed on
+purpose — don't add them back.
 
 ## Traps that cost real time
 
@@ -74,7 +76,7 @@ Regenerate with `wawoff2` if the brand font changes.
   that were not supplied. `projects.ts` entries are labelled placeholders and
   `/work` says so on the page; keep that honesty if you touch them.
 - **"TBX" and the ® symbol were deliberately removed site-wide.** Do not
-  reintroduce either. The `(NN)` section indices stayed.
+  reintroduce either.
 - Voice is declarative and ends in a period — "Selected builds.", "Pick a
   model. Scope it right." No apologies, no exclamation marks.
 

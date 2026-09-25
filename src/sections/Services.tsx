@@ -231,7 +231,33 @@ const VISUALS = [SoftwareVisual, WebVisual, MobileVisual, DesignVisual, AIVisual
 
 /* -------------------------------------------------------------------- */
 
-export function Services() {
+/** The section's headline. The home page lifts it into the At a glance block. */
+export function ServicesIntro({ align = "center" }: { align?: "center" | "left" }) {
+  const centred = align === "center";
+  return (
+    <>
+      <SplitReveal
+        as="h2"
+        className={`text-display max-w-[1080px] text-ivory ${centred ? "mx-auto" : ""}`}
+        stagger={0.1}
+      >
+        Everything you need to build it right.
+      </SplitReveal>
+      <Reveal delay={0.15} y={24}>
+        <p className={`mt-6 max-w-[560px] text-balance text-[15.5px] text-muted-dark ${centred ? "mx-auto" : ""}`}>
+          Strategy, design, development, and automation — five core services, one accountable team.
+        </p>
+      </Reveal>
+    </>
+  );
+}
+
+export function Services({
+  /** false swaps the headline for a plain label bar (the home page shows it earlier). */
+  intro = true,
+}: {
+  intro?: boolean;
+}) {
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -263,20 +289,19 @@ export function Services() {
 
   return (
     <section ref={rootRef} className="bg-bg pb-[var(--section-gap)]" aria-label="Services" id="services">
-      <div className="container-site pb-[clamp(40px,5vw,80px)] text-center">
-        <SplitReveal
-          as="h2"
-          className="text-display mx-auto max-w-[1080px] text-ivory"
-          stagger={0.1}
-        >
-          Everything you need to build it right.
-        </SplitReveal>
-        <Reveal delay={0.15} y={24}>
-          <p className="mx-auto mt-6 max-w-[560px] text-[15.5px] text-muted-dark">
-            Strategy, design, development, and automation — five core services, one accountable team.
-          </p>
-        </Reveal>
-      </div>
+      {intro ? (
+        <div className="container-site pb-[clamp(40px,5vw,80px)] text-center">
+          <ServicesIntro />
+        </div>
+      ) : (
+        <div className="container-site pb-[clamp(36px,4.5vw,64px)]">
+          <div className="flex items-center border-t border-line-dark pt-5">
+            <p className="label-mono label-lead text-muted-dark">
+              <span className="text-gold">©</span> What we build
+            </p>
+          </div>
+        </div>
+      )}
 
       <div className="px-[var(--frame-pad)]">
         {services.map((s, i) => {

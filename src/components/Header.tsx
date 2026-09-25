@@ -40,7 +40,7 @@ export function Header() {
   return (
     <>
       {/* Top-center notched brand badge */}
-      <div className="pointer-events-none fixed inset-x-0 top-0 z-[60] flex justify-center">
+      <div data-site-chrome className="pointer-events-none fixed inset-x-0 top-0 z-[60] flex justify-center">
         <Link
           href="/"
           aria-label="TrinityByte — home"
@@ -55,8 +55,8 @@ export function Header() {
         </Link>
       </div>
 
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-50">
-        <div className="flex items-center justify-between px-[calc(var(--frame-pad)+14px)] py-[calc(var(--frame-pad)+10px)]">
+      <header data-site-chrome className="pointer-events-none fixed inset-x-0 top-0 z-50">
+        <div className="flex items-center justify-between px-[clamp(12px,1.4vw,22px)] py-[clamp(12px,1.3vw,20px)]">
           {/* Start a Project + clock */}
           <div className="flex items-center gap-5">
             <div className="pointer-events-auto hidden sm:block">

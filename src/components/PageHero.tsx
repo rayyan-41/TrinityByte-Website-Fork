@@ -5,24 +5,22 @@ import { TMark } from "@/components/ui/Logo";
 
 type Props = {
   eyebrow: string;
-  kicker?: string;
   title: string;
   lead?: string;
   children?: ReactNode;
 };
 
 /** Shared editorial page header for inner pages. */
-export function PageHero({ eyebrow, kicker, title, lead, children }: Props) {
+export function PageHero({ eyebrow, title, lead, children }: Props) {
   return (
     <section className="relative overflow-hidden bg-bg pb-[clamp(48px,6vw,90px)] pt-[clamp(140px,15vw,210px)]">
       <TMark className="pointer-events-none absolute -right-[3%] top-1/2 h-[70%] w-auto -translate-y-1/2 text-white opacity-[0.028]" />
       <div className="pointer-events-none absolute right-[-8%] top-[-15%] h-[560px] w-[560px] rounded-full bg-[radial-gradient(closest-side,rgba(200,171,114,0.08),transparent)]" />
       <div className="container-site relative">
-        <div className="flex items-center justify-between border-b border-line-dark pb-5">
-          <p className="label-mono text-muted-dark">
+        <div className="flex items-center border-b border-line-dark pb-5">
+          <p className="label-mono label-lead text-muted-dark">
             <span className="text-gold">©</span> {eyebrow}
           </p>
-          {kicker ? <p className="label-mono text-muted-dark">{kicker}</p> : null}
         </div>
 
         <SplitReveal

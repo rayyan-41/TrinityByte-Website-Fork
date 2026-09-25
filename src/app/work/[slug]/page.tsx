@@ -48,14 +48,13 @@ export default async function ProjectPage({ params }: Params) {
             }}
           />
           <div className="container-site relative">
-            <div className="flex items-center justify-between border-b border-line-dark pb-5">
+            <div className="flex items-center border-b border-line-dark pb-5">
               <Link
                 href="/work"
                 className="link-underline label-mono inline-flex min-h-[34px] items-center text-muted-dark hover:text-ivory"
               >
                 ← All work
               </Link>
-              <p className="label-mono text-muted-dark">({project.index})</p>
             </div>
 
             <p className="mt-[clamp(28px,3.5vw,52px)] label-mono text-gold">

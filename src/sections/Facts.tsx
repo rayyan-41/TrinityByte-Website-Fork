@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { type ReactNode, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,7 +12,12 @@ const FACTS = [
   { value: "07", suffix: "", count: true, label: ["Stage development", "process"] },
 ];
 
-export function Facts() {
+export function Facts({
+  /** Optional headline rendered between the label bar and the numbers. */
+  intro,
+}: {
+  intro?: ReactNode;
+}) {
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -58,12 +63,12 @@ export function Facts() {
 
   return (
     <section ref={rootRef} className="container-site bg-bg pb-[var(--section-gap)]" aria-label="TrinityByte at a glance">
-      <div className="flex items-center justify-between border-t border-line-dark pt-5">
-        <p className="label-mono text-muted-dark">
+      <div className="flex items-center border-t border-line-dark pt-5">
+        <p className="label-mono label-lead text-muted-dark">
           <span className="text-gold">©</span> At a glance
         </p>
-        <p className="label-mono hidden text-muted-dark sm:block">Global delivery · Worldwide</p>
       </div>
+      {intro ? <div className="mt-[clamp(36px,4.5vw,64px)]">{intro}</div> : null}
       <div className="mt-[clamp(36px,5vw,72px)] grid grid-cols-1 gap-y-14 sm:grid-cols-3">
         {FACTS.map((f) => (
           <div key={f.value} data-fact-cell data-anim-fade>

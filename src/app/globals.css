@@ -311,8 +311,77 @@ button:hover .flip-label > span:nth-child(2) {
 /* GSAP's SplitText line masks clip to the line box, and our display styles run
    line-height below 1 — so descenders (g, y, p) fell outside it and got cut.
    Grow the clip box downward and pull the same amount back off the flow, which
-   uncovers the descenders without moving a single line. */
+   uncovers the descenders without moving a single line.
+   The same happens sideways: tight negative tracking lets the last glyph's ink
+   run past the line box (the footer wordmark's final "e" got shaved), so the
+   clip box grows horizontally too. */
 .split-line-mask {
   padding-bottom: 0.14em;
   margin-bottom: -0.14em;
+  padding-inline: 0.08em;
+  margin-inline: -0.08em;
+}
+
+/* Home hero owns the first screen: site chrome steps aside while it is in view.
+   `data-hero-active` on <html> is set pre-paint on "/" and then driven by the Hero's ScrollTrigger. */
+[data-site-chrome] {
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo),
+    visibility 0s linear 0s;
+}
+html[data-hero-active] [data-site-chrome] {
+  opacity: 0;
+  transform: translateY(-14px);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    visibility 0s linear 0.35s;
+}
+
+/* A slow light band across the brushed-metal mark, clipped to the mark's own alpha. */
+.logo-sheen {
+  pointer-events: none;
+  -webkit-mask: url("/brand/TB_logo_no_bg.png") center / contain no-repeat;
+  mask: url("/brand/TB_logo_no_bg.png") center / contain no-repeat;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 248, 230, 0.55) 50%, transparent 62%);
+  background-size: 250% 100%;
+  background-position: 130% 0;
+  mix-blend-mode: soft-light;
+  animation: logo-sheen 7s var(--ease-inout) 1.6s infinite;
+}
+@keyframes logo-sheen {
+  0% {
+    background-position: 130% 0;
+  }
+  28%,
+  100% {
+    background-position: -30% 0;
+  }
+}
+
+/* Hero scroll cue: a gold arrow that bobs down and brightens, hinting at more below. */
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(-3px);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(4px);
+    opacity: 1;
+  }
+}
+.scroll-cue-arrow {
+  animation: scroll-cue 1.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(200, 171, 114, 0.55));
+}
+
+/* Section label (the "© Our stack" line that opens a section): one step up from
+   .label-mono in size and weight so it reads as the section's anchor. */
+.label-lead {
+  font-size: clamp(12.5px, 1vw, 14px);
+  font-weight: 600;
 }

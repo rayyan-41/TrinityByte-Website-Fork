@@ -10,10 +10,10 @@ import {
   Smartphone,
   Wrench,
 } from "lucide-react";
-import { technologies, industries } from "@/data/services";
+import { technologies } from "@/data/services";
 import { CategoryList, type Category } from "@/components/ui/category-list";
 import { SplitReveal } from "@/components/anim/SplitReveal";
-import { TMark } from "@/components/ui/Logo";
+import { IndustriesMarquee } from "@/sections/IndustriesMarquee";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,7 +33,12 @@ const techCategories: Category[] = technologies.map((group) => ({
   icon: ICONS[group.group],
 }));
 
-export function TechIndustries() {
+export function TechIndustries({
+  /** The home page shows the industries marquee up in its overview instead. */
+  showIndustries = true,
+}: {
+  showIndustries?: boolean;
+}) {
   const rootRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -62,12 +67,10 @@ export function TechIndustries() {
     <section ref={rootRef} className="bg-bg pb-[var(--section-gap)]" aria-label="Technologies and industries">
       <div className="container-site">
         {/* label bar */}
-        <div className="flex items-center justify-between border-t border-line-dark pt-5">
-          <p className="label-mono text-muted-dark">
+        <div className="flex items-center border-t border-line-dark pt-5">
+          <p className="label-mono label-lead text-muted-dark">
             <span className="text-gold">©</span> Our stack
           </p>
-          <p className="label-mono hidden text-muted-dark md:block">(03)</p>
-          <p className="label-mono text-muted-dark">Battle-tested tools</p>
         </div>
 
         <SplitReveal
@@ -84,28 +87,7 @@ export function TechIndustries() {
         </div>
       </div>
 
-      {/* industries marquee */}
-      <div className="mt-[clamp(56px,7vw,100px)]">
-        <p className="label-mono container-site text-muted-dark">
-          <span className="text-gold">©</span> Industries we serve
-        </p>
-        <div className="relative mt-7 overflow-hidden py-2 [mask-image:linear-gradient(90deg,transparent,black_8%,black_92%,transparent)]">
-          <div className="marquee-track items-center gap-0" style={{ "--marquee-dur": "56s" } as React.CSSProperties}>
-            {[0, 1].map((dup) => (
-              <div key={dup} className="flex shrink-0 items-center" aria-hidden={dup === 1}>
-                {industries.map((ind) => (
-                  <span key={`${dup}-${ind}`} className="flex items-center">
-                    <span className="whitespace-nowrap px-6 font-display text-[clamp(34px,4.2vw,60px)] font-semibold tracking-[-0.03em] text-ivory/25 transition-colors duration-300 hover:text-ivory">
-                      {ind}
-                    </span>
-                    <TMark className="h-4 w-4 shrink-0 text-gold/50" />
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      {showIndustries && <IndustriesMarquee className="mt-[clamp(56px,7vw,100px)]" />}
     </section>
   );
 }

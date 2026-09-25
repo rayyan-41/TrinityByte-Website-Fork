@@ -50,7 +50,6 @@ export default function WorkPage() {
       <main>
         <PageHero
           eyebrow="Featured projects"
-          kicker="(01)"
           title="Selected builds."
           lead="Every project blends design and engineering — shaping bold ideas into sleek digital realities, built with intent, speed, and visual clarity."
         />
@@ -80,11 +79,10 @@ export default function WorkPage() {
 
         {/* capabilities recap */}
         <section className="container-site bg-bg pb-[var(--section-gap)]" aria-label="What we can build">
-          <div className="flex items-center justify-between border-t border-line-dark pt-5">
-            <p className="label-mono text-muted-dark">
+          <div className="flex items-center border-t border-line-dark pt-5">
+            <p className="label-mono label-lead text-muted-dark">
               <span className="text-gold">©</span> What we can build for you
             </p>
-            <p className="label-mono text-muted-dark">(02)</p>
           </div>
           <Reveal y={26}>
             <div className="mt-[clamp(32px,4vw,56px)]">

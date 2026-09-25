@@ -1,7 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/sections/Hero";
-import { Facts } from "@/sections/Facts";
+import { Overview } from "@/sections/Overview";
 import { Services } from "@/sections/Services";
 import { TechIndustries } from "@/sections/TechIndustries";
 import { MorphWork } from "@/sections/MorphWork";
@@ -17,16 +17,16 @@ export default function Home() {
     <>
       <Header />
       <main>
-        {/* The hero's scroll scene now reveals the "hybrid software house"
-            statement, description and About CTA that the Intro section used to
-            carry, so Intro is no longer rendered here. The component still
-            exists at src/sections/Intro.tsx if that block is ever wanted back. */}
+        {/* Intro is no longer rendered here; the component still exists at
+            src/sections/Intro.tsx if that block is ever wanted back.
+            Overview carries the services headline, the facts and the industries
+            marquee, so Services and TechIndustries drop their own copies here. */}
         <Hero />
-        <Facts />
-        <Services />
-        <TechIndustries />
-        <MorphWork />
+        <Overview />
         <Statement />
+        <Services intro={false} />
+        <TechIndustries showIndustries={false} />
+        <MorphWork />
         <Partnership />
         <Process />
         <Ribbons />

@@ -55,12 +55,10 @@ export function Engagement() {
   return (
     <section ref={rootRef} className="bg-bg" aria-label="Engagement models" id="engagement">
       {/* label bar */}
-      <div className="container-site flex items-center justify-between border-t border-line-dark pt-5">
-        <p className="label-mono text-muted-dark">
+      <div className="container-site flex items-center border-t border-line-dark pt-5">
+        <p className="label-mono label-lead text-muted-dark">
           <span className="text-gold">©</span> Engagement models{" "}
         </p>
-        <p className="label-mono hidden text-muted-dark md:block">(07)</p>
-        <p className="label-mono text-muted-dark">Custom quotes</p>
       </div>
 
       <div className="container-site pb-[clamp(40px,5vw,72px)] pt-[clamp(48px,6vw,90px)]">
