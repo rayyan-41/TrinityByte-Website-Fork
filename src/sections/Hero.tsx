@@ -6,7 +6,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { MapPin } from "lucide-react";
 import { PillButton } from "@/components/ui/PillButton";
-import { TMark } from "@/components/ui/Logo";
 import { HeroField } from "@/sections/hero/HeroField";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -51,13 +50,13 @@ export function Hero() {
       setChrome(root.getBoundingClientRect().bottom > window.innerHeight * 0.15);
 
       if (reduced) {
-        gsap.set("[data-intro-logo], [data-hero-fade], [data-hero-cue]", { autoAlpha: 1 });
+        gsap.set("[data-intro-logo], [data-hero-label], [data-hero-fade], [data-hero-cue]", { autoAlpha: 1 });
         return;
       }
 
-      // Entrance: only the mark (and the scroll cue) — the copy waits for scroll.
-      // It animates the inner logo node; the reveal below moves the wrapper, so
-      // the two never fight over the same transform.
+      // Entrance: only the mark, its label and the scroll cue — the copy waits
+      // for scroll. It animates the inner nodes; the reveal below moves the
+      // wrapper, so the two never fight over the same transform.
       gsap
         .timeline()
         .fromTo(
@@ -66,6 +65,7 @@ export function Hero() {
           { autoAlpha: 1, y: 0, scale: 1, duration: 1.4, ease: "expo.out" },
           0.1
         )
+        .fromTo("[data-hero-label]", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 1, ease: "power3.out" }, 0.55)
         .fromTo("[data-hero-cue]", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, ease: "power2.out" }, 0.9);
 
       // offsetTop ignores transforms, so this measures the settled position
@@ -73,10 +73,10 @@ export function Hero() {
 
       // The reveal is a timed step, not a scrub: one scroll plays it through —
       // the mark rises from dead centre and eases down in size, then the copy
-      // arrives beneath it — and the next scroll leaves the hero as normal.
+      // arrives beneath it — and the next scroll leaves the hero as normal. The
+      // scroll cue stays put through both steps, since there is always more below.
       const reveal = gsap
         .timeline({ paused: true })
-        .to("[data-hero-cue]", { autoAlpha: 0, duration: 0.3, ease: "power1.out" }, 0)
         .fromTo(
           logo,
           { y: centreOffset, scale: LANDING_SCALE },
@@ -216,48 +216,50 @@ export function Hero() {
       />
 
       <div className="pointer-events-none relative z-10 flex h-full flex-col items-center justify-center px-6 pb-16 text-center">
-        <div ref={logoRef} className="relative">
-          {/* atmosphere rides with the mark — a wide champagne bloom with a hotter core */}
-          <div
-            aria-hidden="true"
-            className="absolute left-1/2 top-1/2 h-[125svh] w-[125svh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(200,171,114,0.26),rgba(200,171,114,0.08)_55%,transparent)]"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute left-1/2 top-1/2 h-[48svh] w-[48svh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(229,205,150,0.30),transparent)] blur-2xl"
-          />
-          <div
-            data-intro-logo
-            data-anim-fade
-            className="relative aspect-[506/493] h-[clamp(110px,24svh,240px)] sm:h-[clamp(140px,32svh,380px)]"
-          >
-            {/* the PNG carries wide transparent margins; scaling the artwork (not the
-                box) makes the mark itself read bigger without pushing the copy down */}
-            <div className="absolute inset-0 scale-[1.32]">
-              <Image
-                src="/brand/TB_logo_no_bg.png"
-                alt="TrinityByte"
-                width={506}
-                height={493}
-                priority
-                sizes="(max-width: 640px) 70vw, 620px"
-                className="h-full w-full object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)]"
-              />
-              <span aria-hidden="true" className="logo-sheen absolute inset-0" />
+        {/* the mark and its label land together and travel as one */}
+        <div ref={logoRef} className="flex flex-col items-center">
+          <div className="relative">
+            {/* atmosphere rides with the mark — a wide champagne bloom with a hotter core */}
+            <div
+              aria-hidden="true"
+              className="absolute left-1/2 top-1/2 h-[125svh] w-[125svh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(200,171,114,0.26),rgba(200,171,114,0.08)_55%,transparent)]"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute left-1/2 top-1/2 h-[48svh] w-[48svh] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(229,205,150,0.30),transparent)] blur-2xl"
+            />
+            <div
+              data-intro-logo
+              data-anim-fade
+              className="relative aspect-[506/493] h-[clamp(110px,24svh,240px)] sm:h-[clamp(140px,32svh,380px)]"
+            >
+              {/* the PNG carries wide transparent margins; scaling the artwork (not the
+                  box) makes the mark itself read bigger without pushing the copy down */}
+              <div className="absolute inset-0 scale-[1.32]">
+                <Image
+                  src="/brand/TB_logo_no_bg.png"
+                  alt="TrinityByte"
+                  width={506}
+                  height={493}
+                  priority
+                  sizes="(max-width: 640px) 70vw, 620px"
+                  className="h-full w-full object-contain drop-shadow-[0_30px_60px_rgba(0,0,0,0.55)]"
+                />
+                <span aria-hidden="true" className="logo-sheen absolute inset-0" />
+              </div>
             </div>
           </div>
+
+          <p
+            data-hero-label
+            data-anim-fade
+            className="relative mt-6 font-mono-brand text-[10px] uppercase tracking-[0.22em] text-gold sm:text-[11px]"
+          >
+            Hybrid Software House — Est. 2026
+          </p>
         </div>
 
         <div className="flex flex-col items-center">
-          <p
-            data-hero-fade
-            data-anim-fade
-            className="mt-6 flex items-center gap-2.5 font-mono-brand text-[10px] uppercase tracking-[0.22em] text-gold sm:text-[11px]"
-          >
-            <TMark className="h-4 w-4" />
-            Hybrid Software House — Est. 2026
-          </p>
-
           <h1
             data-hero-fade
             data-anim-fade
