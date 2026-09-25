@@ -204,21 +204,23 @@ export function KineticMenuOverlay({
 
     const n = items.length;
     const iSvg  = root.querySelector<SVGSVGElement>("[data-indicator-svg]");
-    const iPath = root.querySelector<SVGPathElement>("[data-indicator-path]");
+    const iGuide = root.querySelector<SVGPathElement>("[data-indicator-guide]");
+    const iFill = root.querySelector<SVGSVGElement>("[data-indicator-fill]");
     const iDot  = root.querySelector<HTMLElement>("[data-indicator-dot]");
     const navEl = root.querySelector<HTMLElement>("nav");
-    if (!iSvg || !iPath || !iDot || !navEl) return;
+    if (!iSvg || !iGuide || !iFill || !iDot || !navEl) return;
 
-    // One progress value (0–100 along the snake) drives both the gold reveal
-    // and the dot, so the dot rides the curve instead of cutting straight down.
+    // One progress value (0–100 along the snake) places the dot on the guide
+    // path and clips the gold fill to end exactly at the dot.
     const progress = { p: 0 };
     const place = () => {
-      const len = iPath.getTotalLength();
-      const pt = iPath.getPointAtLength((progress.p / 100) * len);
+      const pt = iGuide.getPointAtLength((progress.p / 100) * iGuide.getTotalLength());
       // viewBox → pixels (the svg is stretched with preserveAspectRatio="none")
       const box = iSvg.getBoundingClientRect();
-      gsap.set(iDot, { left: (pt.x / 32) * box.width, top: (pt.y / (n * 100)) * box.height });
-      iPath.setAttribute("stroke-dashoffset", String(100 - progress.p));
+      const x = (pt.x / 32) * box.width;
+      const y = (pt.y / (n * 100)) * box.height;
+      gsap.set(iDot, { left: x, top: y });
+      iFill.style.clipPath = `inset(0 0 ${Math.max(0, box.height - y)}px 0)`;
     };
 
     const prevIndex = { current: -1 };
@@ -232,7 +234,7 @@ export function KineticMenuOverlay({
       const duration = 0.26 + Math.min(distance, 5) * 0.07;
       prevIndex.current = index;
 
-      gsap.to([iPath, iDot], { autoAlpha: 1, duration: 0.18, overwrite: "auto" });
+      gsap.to([iFill, iDot], { autoAlpha: 1, duration: 0.18, overwrite: "auto" });
       gsap.to(progress, {
         p: ((index + 1) / n) * 100,
         duration,
@@ -244,7 +246,7 @@ export function KineticMenuOverlay({
 
     const hide = () => {
       prevIndex.current = -1;
-      gsap.to([iPath, iDot], { autoAlpha: 0, duration: 0.3, overwrite: "auto" });
+      gsap.to([iFill, iDot], { autoAlpha: 0, duration: 0.3, overwrite: "auto" });
     };
 
     root.querySelectorAll<HTMLElement>("[data-menu-item]").forEach((item) => {
@@ -294,8 +296,10 @@ export function KineticMenuOverlay({
                 viewBox={`0 0 32 ${items.length * 100}`}
                 preserveAspectRatio="none"
               >
-                {/* Ghost: the full path, always visible as a guide */}
+                {/* Ghost: the full path, always visible as a guide (and the
+                    geometry the dot is placed along) */}
                 <path
+                  data-indicator-guide
                   d={buildSnakePath(items.length)}
                   fill="none"
                   stroke="rgba(200,171,114,0.26)"
@@ -303,18 +307,24 @@ export function KineticMenuOverlay({
                   strokeLinecap="round"
                   vectorEffect="non-scaling-stroke"
                 />
-                {/* Active reveal — stroke-dashoffset driven by GSAP */}
+              </svg>
+              {/* Gold fill: the same path, clipped from the top down to the dot.
+                  The snake only ever descends, so clipping by height reveals
+                  exactly the stretch the dot has travelled. */}
+              <svg
+                data-indicator-fill
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 left-0 h-full w-8 opacity-0"
+                viewBox={`0 0 32 ${items.length * 100}`}
+                preserveAspectRatio="none"
+                style={{ clipPath: "inset(0 0 100% 0)" }}
+              >
                 <path
-                  data-indicator-path
-                  className="opacity-0"
                   d={buildSnakePath(items.length)}
                   fill="none"
                   stroke="rgba(200,171,114,0.80)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
                   vectorEffect="non-scaling-stroke"
                 />
               </svg>
