@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { nav, site } from "@/data/site";
+import { nav } from "@/data/site";
 import { TMark } from "@/components/ui/Logo";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import {
@@ -95,35 +95,6 @@ export function Header() {
         onClose={() => toggle(false)}
         items={nav}
         activeHref={pathname}
-        footer={
-          <div className="flex flex-wrap items-end justify-between gap-x-10 gap-y-6">
-            <div data-menu-fade>
-              <p className="label-mono text-muted-dark">Get in touch</p>
-              <a
-                href={`mailto:${site.email}`}
-                className="link-underline mt-1.5 inline-flex min-h-[36px] items-center font-display text-[clamp(16px,1.6vw,20px)] font-medium text-ivory"
-                tabIndex={open ? 0 : -1}
-              >
-                {site.email}
-              </a>
-            </div>
-            <div data-menu-fade className="flex items-center gap-7">
-              <a
-                href={site.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="link-underline inline-flex min-h-[34px] items-center text-[14px] text-muted-dark hover:text-ivory"
-                tabIndex={open ? 0 : -1}
-              >
-                LinkedIn
-              </a>
-              <span className="label-mono text-muted-dark">{site.workplace}</span>
-            </div>
-            <p data-menu-fade className="label-mono text-gold">
-              {site.tagline}
-            </p>
-          </div>
-        }
       />
     </>
   );
