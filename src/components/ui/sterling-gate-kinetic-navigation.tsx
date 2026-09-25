@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
+import { site } from "@/data/site";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(CustomEase);
@@ -24,9 +25,10 @@ if (typeof window !== "undefined") {
 
    Adapted:
      - TrinityByte's own six routes, not the demo's links
-     - Hover indicator: a gold S-wave that reveals from the top down to the
-       hovered nav item via stroke-dashoffset; distance-based duration so
-       adjacent steps are smooth and long jumps feel snappy
+     - Hover indicator: a faint S-wave guide sits beside the links; on hover it
+       fills gold from the top down to the hovered item while a dot rides the
+       curve to it. Distance-based duration keeps adjacent steps smooth and
+       long jumps snappy
      - Tailwind + inline styles, since the source shipped no CSS
      - links leave the tab order while closed; Escape and backdrop close it
    ============================================================ */
@@ -207,6 +209,18 @@ export function KineticMenuOverlay({
     const navEl = root.querySelector<HTMLElement>("nav");
     if (!iSvg || !iPath || !iDot || !navEl) return;
 
+    // One progress value (0–100 along the snake) drives both the gold reveal
+    // and the dot, so the dot rides the curve instead of cutting straight down.
+    const progress = { p: 0 };
+    const place = () => {
+      const len = iPath.getTotalLength();
+      const pt = iPath.getPointAtLength((progress.p / 100) * len);
+      // viewBox → pixels (the svg is stretched with preserveAspectRatio="none")
+      const box = iSvg.getBoundingClientRect();
+      gsap.set(iDot, { left: (pt.x / 32) * box.width, top: (pt.y / (n * 100)) * box.height });
+      iPath.setAttribute("stroke-dashoffset", String(100 - progress.p));
+    };
+
     const prevIndex = { current: -1 };
     const cleanups: Array<() => void> = [];
 
@@ -215,31 +229,22 @@ export function KineticMenuOverlay({
       // Scale duration with distance so close steps feel smooth and
       // long jumps feel snappy (roughly constant apparent velocity).
       const distance = prev < 0 ? index + 1 : Math.abs(index - prev);
-      const duration = 0.22 + Math.min(distance, 5) * 0.055;
-      const targetOffset = 100 * (1 - (index + 1) / n);
-      const targetTop    = `${((index + 1) / n) * 100}%`;
-
+      const duration = 0.26 + Math.min(distance, 5) * 0.07;
       prevIndex.current = index;
 
-      gsap.to(iSvg, { autoAlpha: 1, duration: 0.18, overwrite: "auto" });
-      gsap.to(iPath, {
-        attr: { strokeDashoffset: targetOffset },
+      gsap.to([iPath, iDot], { autoAlpha: 1, duration: 0.18, overwrite: "auto" });
+      gsap.to(progress, {
+        p: ((index + 1) / n) * 100,
         duration,
-        ease: "power2.out",
+        ease: "power2.inOut",
         overwrite: "auto",
-      });
-      gsap.to(iDot, {
-        top: targetTop,
-        autoAlpha: 1,
-        duration,
-        ease: "power2.out",
-        overwrite: "auto",
+        onUpdate: place,
       });
     };
 
     const hide = () => {
       prevIndex.current = -1;
-      gsap.to([iSvg, iDot], { autoAlpha: 0, duration: 0.3, overwrite: "auto" });
+      gsap.to([iPath, iDot], { autoAlpha: 0, duration: 0.3, overwrite: "auto" });
     };
 
     root.querySelectorAll<HTMLElement>("[data-menu-item]").forEach((item) => {
@@ -255,8 +260,6 @@ export function KineticMenuOverlay({
     cleanups.push(() => navEl.removeEventListener("mouseleave", hide));
 
     return () => cleanups.forEach((fn) => fn());
-  // items.length is stable for this nav; include it so the closure stays fresh.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items.length]);
 
   return (
@@ -283,19 +286,19 @@ export function KineticMenuOverlay({
           <nav aria-label="Site">
             {/* Relative wrapper lets the absolute indicator align to the list */}
             <div className="relative">
-              {/* S-wave indicator — hidden until first hover */}
+              {/* S-wave indicator — the faint guide is always shown; the gold fill and dot follow hover */}
               <svg
                 data-indicator-svg
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-y-0 left-0 h-full w-8 opacity-0"
+                className="pointer-events-none absolute inset-y-0 left-0 h-full w-8"
                 viewBox={`0 0 32 ${items.length * 100}`}
                 preserveAspectRatio="none"
               >
-                {/* Ghost: full path, very faint, always visible while svg is shown */}
+                {/* Ghost: the full path, always visible as a guide */}
                 <path
                   d={buildSnakePath(items.length)}
                   fill="none"
-                  stroke="rgba(200,171,114,0.07)"
+                  stroke="rgba(200,171,114,0.26)"
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   vectorEffect="non-scaling-stroke"
@@ -303,6 +306,7 @@ export function KineticMenuOverlay({
                 {/* Active reveal — stroke-dashoffset driven by GSAP */}
                 <path
                   data-indicator-path
+                  className="opacity-0"
                   d={buildSnakePath(items.length)}
                   fill="none"
                   stroke="rgba(200,171,114,0.80)"
@@ -315,12 +319,11 @@ export function KineticMenuOverlay({
                 />
               </svg>
 
-              {/* Glowing dot that rides to the current item boundary */}
+              {/* Glowing dot — positioned along the path by the indicator effect */}
               <div
                 data-indicator-dot
                 aria-hidden="true"
-                className="pointer-events-none absolute left-4 h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold opacity-0 shadow-[0_0_8px_3px_rgba(200,171,114,0.45)]"
-                style={{ top: `${(1 / items.length) * 100}%` }}
+                className="pointer-events-none absolute left-4 top-0 h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold opacity-0 shadow-[0_0_8px_3px_rgba(200,171,114,0.45)]"
               />
 
               <ul className="flex flex-col">
@@ -337,11 +340,11 @@ export function KineticMenuOverlay({
                       href={item.href}
                       onClick={onClose}
                       tabIndex={open ? 0 : -1}
-                      className="group relative flex items-baseline gap-5 py-2 outline-none"
+                      className="group relative flex items-baseline justify-between gap-5 py-[clamp(10px,2.6vh,28px)] pl-12 outline-none"
                     >
                       <span
                         data-nav-link
-                        className="inline-block font-mono-brand text-[11px] text-gold"
+                        className="order-last inline-block font-mono-brand text-[11px] text-gold"
                       >
                         0{i + 1}
                       </span>
@@ -361,7 +364,12 @@ export function KineticMenuOverlay({
             </div>
           </nav>
 
-          {footer ? <div className="mt-10">{footer}</div> : null}
+          <div className="mt-10">
+            {footer}
+            <p data-menu-fade className="label-mono text-muted-dark">
+              Established in {site.established}
+            </p>
+          </div>
         </div>
       </div>
     </div>
