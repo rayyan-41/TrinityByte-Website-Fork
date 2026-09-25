@@ -5,7 +5,10 @@ import { SplitReveal } from "@/components/anim/SplitReveal";
 
 export function Footer() {
   return (
-    <footer className="bg-ivory text-ink" aria-label="Footer">
+    <footer
+      className="relative z-10 rounded-t-[var(--card-radius)] bg-ivory text-ink shadow-[0_-30px_80px_rgba(0,0,0,0.45)]"
+      aria-label="Footer"
+    >
       <div className="container-site pt-[clamp(48px,6vw,84px)]">
         <div className="grid grid-cols-1 gap-y-12 border-t border-line-light pt-[clamp(36px,4.5vw,64px)] md:grid-cols-12">
           {/* brand + contact */}

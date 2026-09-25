@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { TMark } from "@/components/ui/Logo";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -56,22 +54,12 @@ export function Statement() {
   return (
     <section ref={rootRef} className="relative bg-bg py-[calc(var(--section-gap)*0.9)]" aria-label="Who we work with">
       {/* floating brand cards */}
-      <div data-float-card className="pointer-events-none absolute left-[4%] top-[2%] hidden w-[230px] overflow-hidden rounded-2xl lg:block">
-        <Image
-          src="/brand/TB_logo_no_bg.png"
-          alt=""
-          width={506}
-          height={493}
-          className="h-auto w-full object-contain p-6"
-        />
-      </div>
       <div
         data-float-card
         className="grain pointer-events-none absolute right-[6%] top-[6%] hidden h-[300px] w-[240px] overflow-hidden rounded-2xl lg:block"
         style={{ background: "linear-gradient(160deg,#2a2417 0%,#131009 55%,#0b0a07 100%)" }}
       >
         <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_70%_20%,rgba(200,171,114,0.4),transparent)]" />
-        <TMark className="absolute bottom-5 left-5 h-8 w-8 text-gold/80" />
       </div>
       <div
         data-float-card

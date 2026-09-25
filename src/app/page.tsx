@@ -8,7 +8,6 @@ import { MorphWork } from "@/sections/MorphWork";
 import { Statement } from "@/sections/Statement";
 import { Partnership } from "@/sections/Partnership";
 import { Process } from "@/sections/Process";
-import { Ribbons } from "@/sections/Ribbons";
 import { Engagement } from "@/sections/Engagement";
 import { CTA } from "@/sections/CTA";
 
@@ -29,7 +28,6 @@ export default function Home() {
         <MorphWork />
         <Partnership />
         <Process />
-        <Ribbons />
         <Engagement />
         <CTA />
       </main>

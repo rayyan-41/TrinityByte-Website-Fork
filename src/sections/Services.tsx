@@ -253,7 +253,7 @@ export function ServicesIntro({ align = "center" }: { align?: "center" | "left" 
 }
 
 export function Services({
-  /** false swaps the headline for a plain label bar (the home page shows it earlier). */
+  /** false swaps the headline for a shorter one (the home page shows the full one earlier). */
   intro = true,
 }: {
   intro?: boolean;
@@ -294,12 +294,19 @@ export function Services({
           <ServicesIntro />
         </div>
       ) : (
-        <div className="container-site pb-[clamp(36px,4.5vw,64px)]">
+        <div className="container-site pb-[clamp(40px,5vw,80px)]">
           <div className="flex items-center border-t border-line-dark pt-5">
             <p className="label-mono label-lead text-muted-dark">
-              <span className="text-gold">©</span> What we build
+              <span className="text-gold">©</span> Our services
             </p>
           </div>
+          <SplitReveal
+            as="h2"
+            className="text-display mt-[clamp(36px,4.5vw,64px)] max-w-[900px] text-ivory"
+            stagger={0.1}
+          >
+            What we build.
+          </SplitReveal>
         </div>
       )}
 
@@ -337,8 +344,8 @@ export function Services({
                   </div>
                 </article>
 
-                {/* visual card */}
-                <div>
+                {/* visual card — decorative, so phones skip it and keep the list tight */}
+                <div className="hidden sm:block">
                   <Visual />
                 </div>
               </div>

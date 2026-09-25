@@ -10,6 +10,10 @@ import { leadership, startupAdvantage } from "@/data/company";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// The startup-advantage line is attributed to the CTO; read from the same
+// leadership list so a name or title change can't drift out of sync.
+const cto = leadership.find((person) => person.role === "CTO")!;
+
 const companyPartners = leadership.slice(0, 3).map((partner) => ({
   name: partner.name,
   designation: partner.role,
@@ -86,9 +90,28 @@ export function Partnership() {
         <div className="grain relative overflow-hidden rounded-[var(--card-radius)] border border-gold/20 bg-gradient-to-br from-[#171410] to-[#0b0a08] p-[clamp(26px,3.5vw,52px)]">
           <div className="absolute -right-[10%] -top-[40%] h-[300px] w-[300px] rounded-full bg-[radial-gradient(closest-side,rgba(200,171,114,0.18),transparent)]" />
           <p className="label-mono text-gold">{startupAdvantage.title}</p>
-          <p className="mt-4 max-w-[820px] font-display text-[clamp(22px,2.6vw,36px)] font-medium leading-[1.25] tracking-[-0.02em] text-ivory">
-            {startupAdvantage.copy}
-          </p>
+          <figure className="relative mt-5">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-1 -top-6 select-none font-display text-[clamp(72px,8vw,120px)] leading-none text-gold/25"
+            >
+              &ldquo;
+            </span>
+            <blockquote className="relative max-w-[860px] pl-[clamp(28px,3vw,44px)] font-display text-[clamp(22px,2.6vw,36px)] font-medium leading-[1.25] tracking-[-0.02em] text-ivory">
+              <p>{startupAdvantage.copy}</p>
+            </blockquote>
+            <figcaption className="mt-7 flex items-center gap-3.5 pl-[clamp(28px,3vw,44px)]">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/30 bg-gold/10 font-display text-[14px] font-semibold text-gold">
+                {cto.initials}
+              </span>
+              <span>
+                <span className="block font-display text-[16px] font-semibold tracking-[-0.01em] text-ivory">
+                  {cto.name}
+                </span>
+                <span className="label-mono block text-muted-dark">{cto.role}, TrinityByte</span>
+              </span>
+            </figcaption>
+          </figure>
           <ul className="mt-7 flex flex-wrap gap-x-8 gap-y-3">
             {startupAdvantage.points.map((point) => (
               <li key={point} className="flex items-center gap-2.5 text-[14px] text-ivory/80">
